@@ -1,52 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<openbox_menu
-	xmlns="http://openbox.org/"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://openbox.org/
-	file:///usr/share/openbox/menu.xsd">
-	<menu id="root-menu" label="Openbox 3">
-		<item label="Terminal emulator">
-			<action name="Execute">
-				<execute>x-terminal-emulator</execute>
-			</action>
-		</item>
-		<item label="Web browser">
-			<action name="Execute">
-				<execute>x-www-browser</execute>
-			</action>
-		</item>
-		<separator />
-		<menu execute="openbox-menu lxde-applications.menu" id="apps" label="Applications"/>
-		<menu id="client-list-menu" />
-		<separator />
-		<item label="Configurations">
-			<action name="Execute">
-				<execute>obconf</execute>
-			</action>
-		</item>
-		<item label="Reconfigure">
-			<action name="Reconfigure" />
-		</item>
-		<separator />
-		<menu id="exit" label="Exit" >
-			<item label="Logout">
-				<action name="Exit" />
-			</item>
-			<item label="Suspend">
-				<action name="Execute">
-					<execute>systemctl suspend</execute>
-				</action>
-			</item>
-			<item label="Reboot">
-				<action name="Execute">
-					<execute>systemctl reboot</execute>
-				</action>
-			</item>
-			<item label="Shutdown">
-				<action name="Execute">
-					<execute>systemctl poweroff</execute>
-				</action>
-			</item>
-		</menu>
-	</menu>
+<openbox_menu>
+    <menu id="root-menu" label="OpenBox 3">
+        <menu id="1" label="Others">
+            <item label="deg"> <action name="Execute">
+                <execute>code</execute>
+            </action> </item>
+            <item label="Emacs"> <action name="Execute">
+		<execute>~/.config/emacs/bin/doom run</execute>
+            </action> </item>
+            <item label="Github Desktop"> <action name="Execute">
+                <execute>github-desktop</execute>
+            </action> </item>
+        </menu>
+        <menu id="7" label="Media">
+            <item label="pavucontrol"> <action name="Execute">
+                <execute>pavucontrol</execute>
+            </action> </item>
+            <item label="Spotify"> <action name="Execute">
+                <execute>spotify-launcher</execute>
+            </action> </item>
+            <item label="Gimp"> <action name="Execute">
+                <execute>gimp</execute>
+            </action> </item>
+        </menu>
+        <menu id="5" label="Internet">
+            <item label="Firefox"> <action name="Execute">
+                <execute>firefox</execute>
+            </action> </item>
+            <item label="Discord"> <action name="Execute">
+                <execute>discord</execute>
+            </action> </item>
+            <item label="network-manager"> <action name="Execute">
+                <execute>urxvt -e nmtui</execute>
+            </action> </item>
+        </menu>
+        <menu id="19" label="Terminals">
+            <item label="Urxvt"> <action name="Execute">
+                <execute>urxvt</execute>
+            </action> </item>
+            <item label="st"> <action name="Execute">
+                <execute>st</execute>
+            </action> </item>
+        </menu>
+        <menu id="37" label="System">
+            <menu id="36" label="Settings">
+                <item label="Openbox Settings"> <action name="Execute">
+                    <execute>obconf</execute>
+                </action> </item>
+                <item label="Panel Settings"> <action name="Execute">
+                    <execute>tint2conf</execute>
+                </action> </item>
+            </menu>
+            <item label="Bashtop"> <action name="Execute">
+                <execute>urxvt -e bashtop</execute>
+            </action> </item>
+        </menu>
+        <menu id="38" label="Utilities">
+            <item label="Thunar"> <action name="Execute">
+                <execute>thunar</execute>
+            </action> </item>
+            <item label="Extract"> <action name="Execute">
+                <execute>xarchiver</execute>
+            </action> </item>
+            <item label="Music"> <action name="Execute">
+                <execute>urxvt -e cmus</execute>
+            </action> </item>
+    	    <item label="Screenshot"> <action name="Execute">
+				<execute>scrot -s ~/Pictures/Screenshots/%b%d::%H%M%S.png</execute>
+    	    </action> </item>
+        </menu>
+        <separator/>
+        <menu id="40" label="OpenBox">
+            <menu id="client-list-menu"/>
+	    <item label="Reload"> <action name="Reconfigure"/> </item>
+	    <separator/>
+    	    <item label="Configuration"> <action name="Execute">
+	    	<execute>urxvt -e nvim .config/openbox</execute>
+    	    </action> </item>
+            <separator/>
+            <item label="Exit"> <action name="Exit"/> </item>
+        </menu>
+    </menu>
+
 </openbox_menu>
