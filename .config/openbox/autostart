@@ -1,0 +1,24 @@
+#!/bin/dash
+
+# Autostart Apps
+xrdb -merge ~/.Xresources &
+#xset +fp ~/.fonts/misc/
+xset b off
+#xset r rate 96
+#xbacklight -set 5
+/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+picom &
+tint2 &
+#hsetroot -fill ~/.wallpaper.jpg
+xsettingsd &
+#dunst -geometry "300x60-28+56" &
+
+# Touchpad settings
+synclient \
+VertEdgeScroll=0 HorizEdgeScroll=0 \
+VertTwoFingerScroll=1 HorizTwoFingerScroll=1 \
+VertScrollDelta=320 HorizScrollDelta=320 \
+MinSpeed=0.05 MaxSpeed=1.2 \
+AccelFactor=0.04 CoastingSpeed=10 \
+TapButton1=0 TapButton2=0 TapButton3=0
+
