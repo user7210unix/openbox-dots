@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# Colors
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+# Gather system info
+if [ -f /etc/os-release ]; then
+    . /etc/os-release
+    OS="$PRETTY_NAME"
+else
+    OS="Linux"
+fi
+HOST=$(hostname)
+KERNEL=$(uname -r | cut -d'-' -f1)
+if command -v dpkg >/dev/null 2>&1; then
+    PACKAGES=$(dpkg --get-selections | wc -l)
+elif command -v rpm >/dev/null 2>&1; then
+    PACKAGES=$(rpm -qa | wc -l)
+else
+    PACKAGES="N/A"
+fi
+MEM=$(free -h | grep "Mem:" | awk '{print $3 "/" $2}' | sed 's/i//g')
+UPTIME=$(uptime -p | sed 's/up //;s/ hours/hr/;s/ minutes/min/')
+
+# Info array
+INFO_LINES=(
+    "$OS"
+    "$HOST"
+    "$KERNEL"
+    "$PACKAGES"
+    "$MEM"
+    "$UPTIME"
+)
+
+# Fixed width for box
+WIDTH=20
+PADDING=$((WIDTH - 4)) # Space for │ and padding
+
+# Print top border
+printf "${BLUE}╭"
+printf "─%.0s" $(seq 1 $((WIDTH-2)))
+printf "╮${NC}\n"
+
+# Print info, centered
+for i in {0..5}; do
+    LINE="${INFO_LINES[$i]}"
+    # Calculate padding for centering
+    LEN=${#LINE}
+    LEFT_PAD=$(((PADDING - LEN) / 2))
+    RIGHT_PAD=$((PADDING - LEN - LEFT_PAD))
+    printf "${BLUE}│${NC} ${GREEN}%${LEFT_PAD}s%-*s%${RIGHT_PAD}s${NC} ${BLUE}│${NC}\n" "" "$LEN" "$LINE" ""
+done
+
+# Print bottom border
+printf "${BLUE}╰"
+printf "─%.0s" $(seq 1 $((WIDTH-2)))
+printf "╯${NC}\n"
