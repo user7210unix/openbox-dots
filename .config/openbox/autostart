@@ -6,4 +6,4 @@ xset b off &
 #xset r rate 96 &
 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 picom &
-tint2 &
+tint2
